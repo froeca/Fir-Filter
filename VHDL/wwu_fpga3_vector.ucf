@@ -1,0 +1,307 @@
+#---------------------------------------------------------------------------
+# File:  wwu_fpga3_vector_null.ucf
+#----------------------------------------------------------------------------
+# ISE constraints file for WWU FPGA3 board with QMTECH Spartan-6 FPGA module
+#   Uses a Xilinx XC6SLX16 FPGA in a FTG256 package with DRAM memory.
+#
+#    The pound symbol indicates a comment line.  All lines initially are
+#    commented out.  Delete the leading pound symbol from those signals
+#    that will be used in a design
+#
+#    Ports that can connect to internal global clock lines have the global
+#    clock number listed in square brackets.
+#
+# last modified by L.Aamodt  11/05/19
+#-----------------------------------------------------------------------------
+#
+#-----------------------------------------------------------------------------
+#      Switches and LEDs on the QMTECH board
+#         (note: pressing qm_sw1 reloads FPGA configuration from PROM)
+#-----------------------------------------------------------------------------
+#
+# NET "qm_sw2" LOC = "T8";   # [Gclk0]
+# NET "qm_sw3" LOC = "R7";   # [Gclk29]
+#
+# NET "qm_led1" LOC = "T9";
+# NET "qm_led3" LOC = "R9";
+#
+#-----------------------------------------------------------------------------
+#          50MHz "master" clock
+#-----------------------------------------------------------------------------
+# 
+NET "mclk" LOC = "A10";  # [Gclk16]
+#
+#-----------------------------------------------------------------------------
+#      FPGA3 board signals and associated ports
+#-----------------------------------------------------------------------------
+#
+#       ___ Signal name, to be used in a VHDL entity or as schematic net name
+#      |              ___ FPGA pin number
+#      |             |        ___ QMTECH board pin numbers
+#      |             |       |
+#      V             V       V
+#
+#NET "sma"   LOC = "E7";  #u8-35  [Gclk15]  (SMA connector. Good for ext clk)
+#
+#-----------------------------------------------------------------------------
+#          Switches
+#-----------------------------------------------------------------------------
+#    NOTE:  sw0 to sw8 are toggle switches
+#
+NET "sw0" LOC = "P9";  #u8-49 
+NET "sw1" LOC = "N8";  #u8-47    [Gclk2]
+NET "sw2" LOC = "D8";  #u8-34
+#NET "sw<3>" LOC = "C8";  #u8-33
+#NET "sw<4>" LOC = "D9";  #u8-32
+#NET "sw<5>" LOC = "F9";  #u8-31
+NET "sw6" LOC = "F10"; #u8-30
+NET "sw7" LOC = "E11"; #u8-29
+#
+#NET "sw<8>" LOC = "N9";	  #u8-55
+#
+#    NOTE: Buttons (btn) are momentary push buttons
+#
+#          Pressing a button = logic '0'
+#              not pressing  = logic '1'
+#          On the circuit board, btns are labeled sw9 to sw14
+#
+#    CAUTION: use sw8 or btn14 but not both in the same schematic or
+#              VHDL entity because they refer to the same physical pin.
+#
+#NET "btn0" LOC = "M9";   #u8-56  sw9    [Gclk3]
+#NET "btn<1>" LOC = "M10";  #u8-57  sw10
+#NET "btn<2>" LOC = "P11";  #u8-58  sw11
+#NET "btn<3>" LOC = "P12";  #u8-59  sw12
+#NET "btn<4>" LOC = "M11";  #u8-60  sw13.
+#NET "btn14"  LOC = "N9";   #u8-55  sw14
+
+#-----------------------------------------------------------------------------
+#          LEDs
+#-----------------------------------------------------------------------------
+#    NOTE:  logic '1' turns an LED on
+#           logic '0' turns an LED off
+#
+#NET "led0" LOC = "L14";  	 #u7-40
+#NET "led1" LOC = "L16";  	 #u7-39
+#NET "led<2>" LOC = "K16";  #u7-38
+#NET "led<3>" LOC = "K15";  #u7-37
+#NET "led<4>" LOC = "J13";  #u7-36   [Gclk9]
+#NET "led<5>" LOC = "K14";  #u7-35   [Gclk8]
+#NET "led<6>" LOC = "J12";  #u7-34   [Gclk10]
+#NET "mled<7>" LOC = "J11";     #u7-33   [Gclk11]
+#NET "mled<8>" LOC = "J16";  	 #u7-32   [Gclk4]
+#NET "mled<9>" LOC = "J14";     #u7-31   [Gclk5]
+#NET "mled<10>" LOC = "D6";     #u8-39
+#NET "mled<11>" LOC = "C6";     #u8-38
+#NET "mled<12>" LOC = "F7";     #u8-37
+#NET "mled<13>" LOC = "E6";  	 #u8-36
+#NET "mled<14>" LOC = "A4";  	 #u8-26
+#NET "mled<15>" LOC = "B5";  	 #u8-25
+#
+#-----------------------------------------------------------------------------
+#          External inputs
+#-----------------------------------------------------------------------------
+#    NOTE:  Pulldowns force inputs to logic zero when they are not
+#           connected to a signal source
+#
+#NET "extin<0>" LOC = "A11" | PULLDOWN;	#u8-14
+#NET "extin<1>" LOC = "C11" | PULLDOWN;	#u8-13
+#NET "extin<2>" LOC = "A12" | PULLDOWN;	#u8-12
+#NET "extin<3>" LOC = "B12" | PULLDOWN;	#u8-11
+#NET "extin<4>" LOC = "A13" | PULLDOWN;	#u8-10
+#NET "extin<5>" LOC = "C13" | PULLDOWN;	#u8-9
+#NET "extin<6>" LOC = "B14" | PULLDOWN;	#u8-8
+#NET "extin<7>" LOC = "A14" | PULLDOWN;	#u8-7
+#NET "extin<8>" LOC = "E10" | PULLDOWN;	#u8-27   [Gclk13]
+#
+#-----------------------------------------------------------------------------
+#          External outputs
+#-----------------------------------------------------------------------------
+#    NOTE:  Logic '1' creates high voltage out (3.3v)
+#           Logic '0' creates low voltage out  (0v)
+#
+NET "extout<0>" LOC = "A5"; #u8-24
+NET "extout<1>" LOC = "B6"; #u8-23
+NET "extout<2>" LOC = "A6"; #u8-22
+NET "extout<3>" LOC = "C7"; #u8-21
+NET "extout<4>" LOC = "A7"; #u8-20
+NET "extout<5>" LOC = "B8"; #u8-19
+NET "extout<6>" LOC = "A8"; #u8-18
+NET "extout<7>" LOC = "C9"; #u8-17  [Gclk19]
+NET "extout<8>" LOC = "A9"; #u8-16  [Gclk18]
+#
+#-----------------------------------------------------------------------------
+#          4-digit 7-segment display
+#-----------------------------------------------------------------------------
+#
+#    NOTE: setting an anode to logic '0' turns that digit on
+#
+#NET "anode<1>" LOC = "T4"; #u8-50  left hand digit
+#NET "anode<2>" LOC = "T5"; #u8-51 
+#NET "anode<3>" LOC = "R5"; #u8-52 
+#NET "anode<4>" LOC = "T6"; #u8-53  right hand digit
+#NET "anode<5>" LOC = "T7"; #u8-54  colon
+#
+#    NOTE: setting a cathode to logic '0' turns that segment on
+#
+#NET "cath<0>" LOC = "M6";  #u8-40  seg a
+#NET "cath<1>" LOC = "P4";  #u8-41  seg b
+#NET "cath<2>" LOC = "N5";  #u8-42  seg c
+#NET "cath<3>" LOC = "P5";  #u8-43  seg d
+#NET "cath<4>" LOC = "N6";  #u8-44  seg e
+#NET "cath<5>" LOC = "M7";  #u8-45  seg f
+#NET "cath<6>" LOC = "P6";  #u8-46  seg g
+#NET "cath<7>" LOC = "L7";  #u8-48  decimal point
+#
+#-----------------------------------------------------------------------------
+#     I/O ports intended for connection to Tektronix logic analyzer
+#-----------------------------------------------------------------------------
+#
+#    NOTE:  tek1, tek2, tek3, and tek4 are 8-bit ports intended for
+#           connection to a Tektronix logic analyzer probe cable.
+#
+NET "tek1<0>" LOC = "D16";  #u7-14
+NET "tek1<1>" LOC = "D14";  #u7-13
+NET "tek1<2>" LOC = "C16";  #u7-12
+NET "tek1<3>" LOC = "C15";  #u7-11
+NET "tek1<4>" LOC = "B16";  #u7-10
+NET "tek1<5>" LOC = "B15";  #u7-9
+NET "tek1<6>" LOC = "E13";  #u7-8
+NET "tek1<7>" LOC = "E12";  #u7-7
+#
+NET "tek2<0>" LOC = "F13";  #u7-22
+NET "tek2<1>" LOC = "F14";  #u7-21
+NET "tek2<2>" LOC = "F12";  #u7-20
+NET "tek2<3>" LOC = "G11";  #u7-19
+NET "tek2<4>" LOC = "F16";  #u7-18
+NET "tek2<5>" LOC = "F15";  #u7-17
+NET "tek2<6>" LOC = "E16";  #u7-16
+NET "tek2<7>" LOC = "E15";  #u7-15
+#
+#NET "tek3<0>" LOC = "H14";  #u7-30
+#NET "tek3<1>" LOC = "H13";  #u7-29
+#NET "tek3<2>" LOC = "H11";  #u7-28
+#NET "tek3<3>" LOC = "G12";  #U7-27
+#NET "tek3<4>" LOC = "H16";  #u7-26
+#NET "tek3<5>" LOC = "H15";  #u7-25
+#NET "tek3<6>" LOC = "G14";  #U7-24
+#NET "tek3<7>" LOC = "G16";  #u7-23
+#
+#NET "tek4<0>" LOC = "M14";  #u7-48
+#NET "tek4<1>" LOC = "M13";  #u7-47
+#NET "tek4<2>" LOC = "N16";  #u7-46
+#NET "tek4<3>" LOC = "N14";  #u7-45
+#NET "tek4<4>" LOC = "M16";  #u7-44
+#NET "tek4<5>" LOC = "M15";  #u7-43
+#NET "tek4<6>" LOC = "K12";  #u7-42  [Gclk7]
+#NET "tek4<7>" LOC = "K11";  #u7-41  [Gclk6]
+#
+#NET "tek5"    LOC = "B10";  #u8-15  [Gclk17]
+#NET "tek6"    LOC = "C10";  #u8-28  [Gclk12]
+#
+#-----------------------------------------------------------------------------
+#          Connections for PMOD (Digilent) I/O modules
+#-----------------------------------------------------------------------------
+#
+NET "adc_cs_bar" LOC = "R15"; #7-53		-- pmod1<1>
+#NET "pmod1<2>" LOC = "R16"; #7-54
+NET "adc_bit_data" LOC = "R14"; #7-55  -- pmod1<3>
+NET "adc_sclk" LOC = "T15"; #7-56		-- pmod1<4>
+NET "pmod1<5>" LOC = "T13"; #7-57
+NET "pmod1<6>" LOC = "T14"; #7-58
+NET "pmod1<7>" LOC = "T12"; #7-59
+NET "pmod1<8>" LOC = "R12"; #7-60
+#
+#NET "pmod2<1>" LOC = "L12"; #7-49
+#NET "pmod2<2>" LOC = "L13"; #7-50
+#NET "pmod2<3>" LOC = "P15"; #7-51
+#NET "pmod2<4>" LOC = "P16"; #7-52
+#
+#      NOTE: PMOD3 is an alias for TEK3 and PMOD4 is an alias for TEK4
+#
+#         If you are using tek3 signal names then leave the pmod3
+#         signal names commented out and vic-versa.  They refer
+#         to the same phical pins.
+#
+#         Also, note that the pmod signal numbering starts at 1 rather
+#         than at 0 to be compatible with Digilent PMOD documentation.
+#
+#NET "pmod3<1>" LOC = "H14"; #7-30 
+#NET "pmod3<2>" LOC = "H13"; #7-29
+#NET "pmod3<3>" LOC = "H11"; #7-28
+#NET "pmod3<4>" LOC = "G12"; #7-27
+#NET "pmod3<5>" LOC = "H16"; #7-26
+#NET "pmod3<6>" LOC = "H15"; #7-25
+#NET "pmod3<7>" LOC = "G14"; #7-24
+#NET "pmod3<8>" LOC = "G16"; #7-23
+#
+#      NOTE:  PMOD4 is an alias for TEK4
+#
+#NET "pmod4<1>" LOC = "M14"; #7-48 
+#NET "pmod4<2>" LOC = "M13"; #7-47
+#NET "pmod4<3>" LOC = "N16"; #7-46
+#NET "pmod4<4>" LOC = "N14"; #7-45
+#NET "pmod4<5>" LOC = "M16"; #7-44
+#NET "pmod4<6>" LOC = "M15"; #7-43
+#NET "pmod4<7>" LOC = "K12"; #7-42
+#NET "pmod4<8>" LOC = "K11"; #7-41
+#
+#-----------------------------------------------------------------------------
+#      SDRAM  Micron MT-48LC16M16 memory on the QMTECH board
+#-----------------------------------------------------------------------------
+#
+# NET "ram_addr<0>" LOC = "L4";
+# NET "ram_addr<1>" LOC = "M3";
+# NET "ram_addr<2>" LOC = "M4";
+# NET "ram_addr<3>" LOC = "N3";
+# NET "ram_addr<4>" LOC = "R2";
+# NET "ram_addr<5>" LOC = "R1";
+# NET "ram_addr<6>" LOC = "P2";
+# NET "ram_addr<7>" LOC = "P1";
+# NET "ram_addr<8>" LOC = "N1";
+# NET "ram_addr<9>" LOC = "M1";
+# NET "ram_addr<10>" LOC = "L3";
+# NET "ram_addr<11>" LOC = "L1";
+# NET "ram_addr<12>" LOC = "K1";
+# NET "ram_addr<13>" LOC = "K3";
+# NET "ram_addr<14>" LOC = "K2";
+#                    
+# NET "ram_data<0>" LOC = "A3";
+# NET "ram_data<1>" LOC = "A2";
+# NET "ram_data<2>" LOC = "B3";
+# NET "ram_data<3>" LOC = "B2";
+# NET "ram_data<4>" LOC = "C3";
+# NET "ram_data<5>" LOC = "C2";
+# NET "ram_data<6>" LOC = "D3";
+# NET "ram_data<7>" LOC = "E3";
+# NET "ram_data<8>" LOC = "G1";
+# NET "ram_data<9>" LOC = "F1";
+# NET "ram_data<10>" LOC = "F2";
+# NET "ram_data<11>" LOC = "E1";
+# NET "ram_data<12>" LOC = "E2";
+# NET "ram_data<13>" LOC = "D1";
+# NET "ram_data<14>" LOC = "C1";
+# NET "ram_data<15>" LOC = "B1";
+#
+# NET "SDWE"    LOC = "G3";
+# NET "SDCKE0"  LOC = "J1";
+# NET "SDCLK0"  LOC = "H1";
+# NET "DQML"    LOC = "F3";
+# NET "DQMH"    LOC = "H2";
+# NET "CAS"     LOC = "H3";
+# NET "RAS"     LOC = "J4";
+# NET "SD_NCS0  LOC = "J3";
+#
+#-----------------------------------------------------------------------------
+#      Time specifications for 50MHz clock
+#-----------------------------------------------------------------------------
+#
+#TIMESPEC TS01 = FROM : FFS : TO : FFS : 20 ns;
+#TIMESPEC TS02 = FROM : RAMS : TO : FFS : 20 ns;
+#TIMESPEC TS03 = FROM : FFS : TO : RAMS : 20 ns;
+#TIMESPEC TS04 = FROM : RAMS : TO : RAMS : 20 ns;
+#TIMESPEC TS05 = FROM : FFS : TO : PADS : 20 ns; 
+#TIMESPEC TS06 = FROM : PADS : TO : FFS : 20 ns; 
+#TIMESPEC TS07 = FROM : PADS : TO : RAMS : 20 ns; 
+#TIMESPEC TS08 = FROM : RAMS : TO : PADS : 20 ns;
+#
